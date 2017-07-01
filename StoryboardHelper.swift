@@ -21,26 +21,31 @@ struct StoryboardHelper {
             return
         }
         
-        var storyboard = UIStoryboard()
-        if height == 667 {
-            // iPhone6,6s,7,7s
-            storyboard = UIStoryboard(name: "Main", bundle: nil)
-        } else if height == 736 {
-            // iPhone6+,7+
-            storyboard = UIStoryboard(name: "Main", bundle: nil)
-        } else if height == 480 {
-            // iPhone4,4s
-            storyboard = UIStoryboard(name: "3.5inch", bundle: nil)
-        } else if height == 1024 {
-            // iPad,2,Air,mini
-            storyboard = UIStoryboard(name: "3.5inch", bundle: nil)
-        } else {
-            // iPhone5,5s,5c,unknown
-            storyboard = UIStoryboard(name: "Main", bundle: nil)
-        }
+        // Check currentDevice.model & height
+        print(currentDevice.model, height)
         
-        window.rootViewController = storyboard.instantiateInitialViewController()! as UIViewController
-        window.makeKeyAndVisible()
+        var storyboard = UIStoryboard()
+        
+        //iPad.Pro
+        if currentDevice.model == "iPad" {
+            storyboard = UIStoryboard(name: "3.5inch", bundle: nil)
+        } else{
+            if height == 667 {
+                // iPhone6,6s,7,7s
+                storyboard = UIStoryboard(name: "Main", bundle: nil)
+            } else if height == 736 {
+                // iPhone6+,7+
+                storyboard = UIStoryboard(name: "Main", bundle: nil)
+            } else if height == 480 {
+                // iPhone4,4s
+                storyboard = UIStoryboard(name: "3.5inch", bundle: nil)
+            }  else {
+                // iPhone5,5s,5c,unknown
+                storyboard = UIStoryboard(name: "Main", bundle: nil)
+        }
     }
-    
+    window.rootViewController = storyboard.instantiateInitialViewController()! as UIViewController
+    window.makeKeyAndVisible()
+}
+
 }
